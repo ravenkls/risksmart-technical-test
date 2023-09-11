@@ -1,0 +1,13 @@
+# Use an official Node.js runtime as a parent image
+FROM node:18
+
+WORKDIR /app
+COPY package.json ./
+COPY yarn.lock ./
+COPY .yarn ./.yarn
+RUN yarn install
+COPY . .
+EXPOSE 3000
+
+# Start the API server
+CMD ["yarn", "start"]

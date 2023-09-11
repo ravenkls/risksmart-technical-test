@@ -1,0 +1,73 @@
+# DATA TYPES
+
+type Employee {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  email: String!
+  department: Department
+}
+
+type EmployeeDeleted {
+  id: Int!
+}
+
+type Department {
+  id: Int!
+  name: String!
+  employees: [Employee!]!
+}
+
+type DepartmentDeleted {
+  id: Int!
+}
+
+# INPUT TYPES
+
+input CreateEmployee {
+  firstName: String!
+  lastName: String!
+  email: String! @constraint(format: "email", maxLength: 255)
+  department: Int
+}
+
+input UpdateEmployee {
+  id: Int!
+  firstName: String
+  lastName: String
+  email: String @constraint(format: "email", maxLength: 255)
+  department: Int
+}
+
+input CreateDepartment {
+  name: String!
+}
+
+input UpdateDepartment {
+  id: Int!
+  name: String
+}
+
+# QUERIES & MUTATIONS
+
+type Query {
+  # employees
+  employees: [Employee!]!
+  employee(id: Int!): Employee!
+
+  # departments
+  departments: [Department!]!
+  department(id: Int!): Department!
+}
+
+type Mutation {
+  # employees
+  createEmployee(data: CreateEmployee!): Employee!
+  updateEmployee(data: UpdateEmployee!): Employee!
+  deleteEmployee(id: Int!): EmployeeDeleted!
+
+  # departments
+  createDepartment(data: CreateDepartment!): Department!
+  updateDepartment(data: UpdateDepartment!): Department!
+  deleteDepartment(id: Int!): DepartmentDeleted!
+}

@@ -5,7 +5,7 @@ import { initialiseDepartments } from "./department/department.setup";
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: process.env.POSTGRES_HOST,
-  port: 5432,
+  port: 5433,
   database: process.env.POSTGRES_DB,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,

@@ -3,6 +3,8 @@ import EmployeesDatatable from "./components/EmployeesDatatable";
 import Button from "./components/Button";
 import EmployeesGraph from "./components/EmployeesGraph";
 import Loading from "./components/Loading";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorMessage from "./components/ErrorMessage";
 
 function App() {
   const [view, setView] = useState<"Table" | "Graph">("Table");
@@ -26,9 +28,11 @@ function App() {
           </Button>
         </div>
       </div>
-      <Suspense fallback={<Loading />}>
-        {view === "Table" ? <EmployeesDatatable /> : <EmployeesGraph />}
-      </Suspense>
+      <ErrorBoundary fallback={<ErrorMessage />}>
+        <Suspense fallback={<Loading />}>
+          {view === "Table" ? <EmployeesDatatable /> : <EmployeesGraph />}
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 }

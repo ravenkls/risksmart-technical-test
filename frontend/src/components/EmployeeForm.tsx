@@ -62,7 +62,7 @@ function EmployeeForm({ isOpen, setOpen, employee }: Props) {
           department: null,
         }
       ),
-    [employee, reset]
+    [employee, reset, isOpen]
   );
 
   const onSubmit = handleSubmit(async (data) => {

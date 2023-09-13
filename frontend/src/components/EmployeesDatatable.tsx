@@ -1,15 +1,9 @@
-import {
-  gql,
-  useApolloClient,
-  useMutation,
-  useSuspenseQuery,
-} from "@apollo/client";
-import React, { useMemo, useState } from "react";
+import { useApolloClient, useMutation, useSuspenseQuery } from "@apollo/client";
+import { useMemo, useState } from "react";
 import Datatable from "./Datatable";
 import {
   DeleteEmployeeMutation,
   DeleteEmployeeMutationVariables,
-  Employee,
   GetEmployeesQuery,
 } from "../gql/graphql";
 import EmployeeForm from "./EmployeeForm";
@@ -17,28 +11,7 @@ import Button from "./Button";
 import { MdDelete } from "react-icons/md";
 import Modal from "./Modal";
 import FormField from "./FormField";
-
-const GET_EMPLOYEES = gql`
-  query GetEmployees {
-    employees {
-      id
-      firstName
-      lastName
-      email
-      department {
-        name
-      }
-    }
-  }
-`;
-
-const DELETE_EMPLOYEE = gql`
-  mutation DeleteEmployee($id: Int!) {
-    deleteEmployee(id: $id) {
-      id
-    }
-  }
-`;
+import { DELETE_EMPLOYEE, GET_EMPLOYEES } from "../gql/queries";
 
 function EmployeesDatatable() {
   const client = useApolloClient();

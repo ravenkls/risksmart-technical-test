@@ -1,5 +1,6 @@
-import { ComponentProps, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { MdExpandLess } from "react-icons/md";
+import Empty from "./Empty";
 
 type SortConfig = {
   column: number;
@@ -82,31 +83,39 @@ function Datatable<T extends Record<string, any>>({
         </tr>
       </thead>
       <tbody>
-        {sortedItems.map((item, i) => (
-          <tr
-            key={i}
-            onClick={() => onClick?.(item)}
-            className={`${
-              onClick
-                ? "hover:bg-gray-200 ease-in duration-50 cursor-pointer"
-                : ""
-            }
+        {sortedItems.length > 0 ? (
+          sortedItems.map((item, i) => (
+            <tr
+              key={i}
+              onClick={() => onClick?.(item)}
+              className={`${
+                onClick
+                  ? "hover:bg-gray-200 ease-in duration-50 cursor-pointer"
+                  : ""
+              }
                ${i % 2 === 1 ? "bg-gray-50" : " "}`}
-          >
-            {columns.map((column, i) => (
-              <td
-                className={
-                  "p-2 " +
-                  (i === 0 ? "opacity-100 " : "opacity-50 ") +
-                  `text-${column.align}`
-                }
-                key={column.label}
-              >
-                {column.value(item)}
-              </td>
-            ))}
+            >
+              {columns.map((column, i) => (
+                <td
+                  className={
+                    "p-2 " +
+                    (i === 0 ? "opacity-100 " : "opacity-50 ") +
+                    `text-${column.align}`
+                  }
+                  key={column.label}
+                >
+                  {column.value(item)}
+                </td>
+              ))}
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan={columns.length}>
+              <Empty />
+            </td>
           </tr>
-        ))}
+        )}
       </tbody>
     </table>
   );

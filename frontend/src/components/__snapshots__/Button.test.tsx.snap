@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button applies danger styles when danger prop is true 1`] = `
+<button
+  class="p-2 text-white bg-primary-600 hover:bg-primary-500 inline-flex w-full sm:w-auto justify-center rounded-md shadow-sm px-3 py-2 text-sm font-semibold text-red-600 "
+>
+  Click me
+</button>
+`;
+
+exports[`Button applies ghost and danger styles when ghost prop is true 1`] = `
+<button
+  class="p-2 bg-white text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 inline-flex w-full sm:w-auto justify-center rounded-md shadow-sm px-3 py-2 text-sm font-semibold text-red-600 "
+>
+  Click me
+</button>
+`;
+
+exports[`Button applies ghost styles when ghost prop is true 1`] = `
+<button
+  class="p-2 bg-white text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 inline-flex w-full sm:w-auto justify-center rounded-md shadow-sm px-3 py-2 text-sm font-semibold  "
+>
+  Click me
+</button>
+`;
+
+exports[`Button matches snapshot 1`] = `
+<button
+  class="p-2 text-white bg-primary-600 hover:bg-primary-500 inline-flex w-full sm:w-auto justify-center rounded-md shadow-sm px-3 py-2 text-sm font-semibold  "
+>
+  Click me
+</button>
+`;

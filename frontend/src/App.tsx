@@ -2,6 +2,7 @@ import { Suspense, useState } from "react";
 import EmployeesDatatable from "./components/EmployeesDatatable";
 import Button from "./components/Button";
 import EmployeesGraph from "./components/EmployeesGraph";
+import Loading from "./components/Loading";
 
 function App() {
   const [view, setView] = useState<"Table" | "Graph">("Table");
@@ -14,7 +15,7 @@ function App() {
     <div className="md:container md:my-8 my-4 mx-auto px-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold mb-2">Employee Ledger</h1>
+          <h1 className="text-2xl font-bold mb-2">Employee Table</h1>
           <p className="mb-8 opacity-50">
             A list of all the employees in the company.
           </p>
@@ -25,7 +26,7 @@ function App() {
           </Button>
         </div>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         {view === "Table" ? <EmployeesDatatable /> : <EmployeesGraph />}
       </Suspense>
     </div>

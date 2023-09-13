@@ -1,7 +1,6 @@
 import Modal from "./Modal";
 import {
   CreateEmployee,
-  Department,
   Employee,
   GetDepartmentsQuery,
   GetEmployeesQuery,
@@ -12,52 +11,20 @@ import {
 import FormField from "./FormField";
 import { useForm, Controller } from "react-hook-form";
 import { useEffect } from "react";
-import { gql, useApolloClient, useMutation, useQuery } from "@apollo/client";
+import { useApolloClient, useMutation, useQuery } from "@apollo/client";
+import {
+  CREATE_EMPLOYEE,
+  GET_DEPARTMENTS,
+  GET_EMPLOYEES,
+  GET_FULL_DEPARTMENTS,
+  UPDATE_EMPLOYEE,
+} from "../gql/queries";
 
 type Props = {
   isOpen: boolean;
   setOpen: (open: boolean) => void;
   employee?: GetEmployeesQuery["employees"][number] | null;
 };
-
-const UPDATE_EMPLOYEE = gql`
-  mutation UpdateEmployee($data: UpdateEmployee!) {
-    updateEmployee(data: $data) {
-      id
-      firstName
-      lastName
-      email
-      department {
-        id
-        name
-      }
-    }
-  }
-`;
-
-const CREATE_EMPLOYEE = gql`
-  mutation CreateEmployee($data: CreateEmployee!) {
-    createEmployee(data: $data) {
-      id
-      firstName
-      lastName
-      email
-      department {
-        id
-        name
-      }
-    }
-  }
-`;
-
-const GET_DEPARTMENTS = gql`
-  query GetDepartments {
-    departments {
-      id
-      name
-    }
-  }
-`;
 
 function EmployeeForm({ isOpen, setOpen, employee }: Props) {
   const {
@@ -81,7 +48,7 @@ function EmployeeForm({ isOpen, setOpen, employee }: Props) {
   >(CREATE_EMPLOYEE, {
     onCompleted: () =>
       client.refetchQueries({
-        include: ["GetEmployees", "GetFullDepartments"],
+        include: [GET_EMPLOYEES, GET_FULL_DEPARTMENTS],
       }),
   });
 
@@ -99,6 +66,7 @@ function EmployeeForm({ isOpen, setOpen, employee }: Props) {
   );
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data);
     if (employee) {
       await updateEmployee({
         variables: {
@@ -107,7 +75,7 @@ function EmployeeForm({ isOpen, setOpen, employee }: Props) {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email,
-            department: data.department
+            department: data.department?.id
               ? {
                   id: data.department.id,
                 }
@@ -122,7 +90,7 @@ function EmployeeForm({ isOpen, setOpen, employee }: Props) {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email,
-            department: data.department
+            department: data.department?.id
               ? {
                   id: data.department.id,
                 }

@@ -1,5 +1,4 @@
-import { ComponentProps, ForwardedRef, Ref, forwardRef } from "react";
-import Input from "./Input";
+import { ComponentProps, Ref, forwardRef } from "react";
 
 type Props = {
   id: string;

@@ -4,7 +4,6 @@ FROM node:18
 WORKDIR /app
 COPY package.json ./
 COPY yarn.lock ./
-COPY .yarn ./.yarn
 RUN yarn install
 COPY . .
 EXPOSE 3000

@@ -91,7 +91,7 @@ describe("Employee Resolvers", () => {
 
       //@ts-expect-error -- it's cleaner to call the resolver directly
       const result = await EmployeeMutations.createEmployee(null, {
-        data: { ...mockEmployee, department: 1 },
+        data: { ...mockEmployee, department: mockDepartment },
       });
       expect(result).toEqual(mockEmployee);
     });
@@ -120,7 +120,7 @@ describe("Employee Resolvers", () => {
 
       //@ts-expect-error -- it's cleaner to call the resolver directly
       const result = await EmployeeMutations.updateEmployee(null, {
-        data: { id: 1, name: "Jane", department: 1 },
+        data: { id: 1, name: "Jane", department: mockDepartment },
       });
       expect(result).toEqual({ ...mockEmployee, name: "Jane" });
     });

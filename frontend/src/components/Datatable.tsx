@@ -10,7 +10,7 @@ type Props<T extends Record<string, any>> = {
   columns: {
     label: string;
     value: (item: T) => React.ReactNode;
-    expand?: boolean;
+    align?: "left" | "right" | "center";
   }[];
   items: T[];
   onClick?: (item: T) => void;
@@ -51,23 +51,22 @@ function Datatable<T extends Record<string, any>>({
 
   return (
     <table className="w-full rounded overflow-hidden">
-      <thead className="bg-primary-100">
+      <thead className="bg-primary-600 text-white">
         <tr>
           {columns.map((column, colIndex) => (
             <th
-              className={
-                "text-left p-2 border-b-2 border-primary-500 font-normal" +
-                (column.expand ? "w-full" : "")
-              }
+              className={"p-2 border-b-2 border-primary-200 font-normal"}
               key={column.label}
             >
               <button
                 onClick={() => handleSort(colIndex)}
-                className={`flex items-center gap-2 ${
+                className={`flex items-center gap-2 w-full ${
                   sortConfig.column === colIndex
                     ? "font-semibold"
                     : "font-normal"
-                }`}
+                } ${column.align === "left" ? "justify-start" : ""}
+                  ${column.align === "center" ? "justify-center" : ""}
+                  ${column.align === "right" ? "justify-end" : ""}`}
               >
                 {column.label}
                 {sortConfig.column === colIndex && (
@@ -87,7 +86,11 @@ function Datatable<T extends Record<string, any>>({
           <tr
             key={i}
             onClick={() => onClick?.(item)}
-            className={`${onClick ? "hover:bg-primary-50 cursor-pointer" : ""}
+            className={`${
+              onClick
+                ? "hover:bg-gray-200 ease-in duration-50 cursor-pointer"
+                : ""
+            }
                ${i % 2 === 1 ? "bg-gray-50" : " "}`}
           >
             {columns.map((column, i) => (
@@ -95,7 +98,7 @@ function Datatable<T extends Record<string, any>>({
                 className={
                   "p-2 " +
                   (i === 0 ? "opacity-100 " : "opacity-50 ") +
-                  (column.expand ? "w-full " : " ")
+                  `text-${column.align}`
                 }
                 key={column.label}
               >

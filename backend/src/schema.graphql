@@ -24,11 +24,15 @@ type DepartmentDeleted {
 
 # INPUT TYPES
 
+input SelectDepartment {
+  id: Int!
+}
+
 input CreateEmployee {
   firstName: String!
   lastName: String!
   email: String! @constraint(format: "email", maxLength: 255)
-  department: Int
+  department: SelectDepartment
 }
 
 input UpdateEmployee {
@@ -36,7 +40,7 @@ input UpdateEmployee {
   firstName: String
   lastName: String
   email: String @constraint(format: "email", maxLength: 255)
-  department: Int
+  department: SelectDepartment
 }
 
 input CreateDepartment {

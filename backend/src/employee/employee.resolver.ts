@@ -49,7 +49,7 @@ export const EmployeeMutations: Mutations = {
     let department = null;
     if (data.department) {
       department = await departmentRepository.findOneBy({
-        id: data.department,
+        id: data.department.id,
       });
     }
 
@@ -75,7 +75,7 @@ export const EmployeeMutations: Mutations = {
     let department = null;
     if (rest.department) {
       department = await departmentRepository.findOneBy({
-        id: rest.department,
+        id: rest.department.id,
       });
     }
 

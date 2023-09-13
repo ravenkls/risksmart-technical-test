@@ -1,15 +1,18 @@
 import React from "react";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import Button from "./Button";
 
 type Props = {
   isOpen: boolean;
   setOpen: (open: boolean) => void;
   title: string;
   children?: React.ReactNode;
+  danger?: boolean;
+  onConfirm?: () => void;
 };
 
-function Modal({ isOpen, setOpen, title, children }: Props) {
+function Modal({ isOpen, setOpen, title, children, onConfirm }: Props) {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -49,20 +52,17 @@ function Modal({ isOpen, setOpen, title, children }: Props) {
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-primary-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                  <Button
+                    className="sm:ml-3"
+                    onClick={async () => {
+                      await onConfirm?.();
+                    }}
                   >
-                    Save
-                  </button>
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setOpen(false)}
-                  >
+                    Confirm
+                  </Button>
+                  <Button ghost onClick={() => setOpen(false)}>
                     Cancel
-                  </button>
+                  </Button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

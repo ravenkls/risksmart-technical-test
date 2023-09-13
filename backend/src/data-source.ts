@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+import { initialiseDepartments } from "./department/department.setup";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -16,8 +17,9 @@ export const AppDataSource = new DataSource({
 });
 
 AppDataSource.initialize()
-  .then(() => {
-    console.log("✔ Database initialised");
+  .then(async (dataSource) => {
+    await initialiseDepartments(dataSource);
+    console.log("✔ Database setup complete");
   })
   .catch((err) => {
     console.error(err);

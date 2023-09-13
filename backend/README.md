@@ -13,7 +13,7 @@ The project is structured in a modular way. For example, all features/tests pert
 ## Setup
 
 ### Quick Start
-To set the project up, you should hopefully (🤞) be able to just run `docker compose up` to start the project. Failing that, you can manually build the project using `yarn install` and `yarn start`.
+To set the project up, you should hopefully (🤞) be able to just run `docker compose up` to start the project. Failing that, you can manually build the project using `yarn install` and `yarn dev`.
 
 ### Extra Information
 If you need/want to change the database credentials, those are stored in the `.env` file, this project uses PostgreSQL, however, this can also be changed in the `src/data-source.ts` file

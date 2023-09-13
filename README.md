@@ -22,9 +22,9 @@ To setup the project, there is a docker-compose.yml file in each of the frontend
 
 ```sh
 cd frontend
-docker compose up -d
+docker compose up -d --build
 cd ../backend
-docker compose up -d
+docker compose up -d --build
 ```
 
 If you have any issues setting up the project, please get in touch with me on [LinkedIn](https://www.linkedin.com/in/kristian-smith1) or by contacting me using any of the contact methods in my GitHub profile. (or creating an issue!)

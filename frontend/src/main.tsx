@@ -6,12 +6,12 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Chart as ChartJS, LinearScale, PointElement } from "chart.js";
 import {
   ForceDirectedGraphController,
+  ForceDirectedGraphChart,
   EdgeLine,
-  TreeController,
 } from "chartjs-chart-graph";
 
 ChartJS.register(
-  TreeController,
+  ForceDirectedGraphChart,
   ForceDirectedGraphController,
   LinearScale,
   PointElement,

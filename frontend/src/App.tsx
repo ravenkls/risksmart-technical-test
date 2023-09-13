@@ -13,10 +13,10 @@ function App() {
 
   return (
     <div className="md:container md:my-8 my-4 mx-auto px-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-3">
         <div>
           <h1 className="text-2xl font-bold mb-2">Employee Table</h1>
-          <p className="mb-8 opacity-50">
+          <p className="opacity-50">
             A list of all the employees in the company.
           </p>
         </div>

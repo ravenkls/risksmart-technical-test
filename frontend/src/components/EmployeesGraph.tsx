@@ -1,4 +1,4 @@
-import { gql, useSuspenseQuery } from "@apollo/client";
+import { useSuspenseQuery } from "@apollo/client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GetFullDepartmentsQuery } from "../gql/graphql";
 import { Chart } from "chart.js";
